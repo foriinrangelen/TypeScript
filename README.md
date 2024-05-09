@@ -1,7 +1,9 @@
 # TypeScript
 
-1. npm init -y
-2. npm i -D parcel typescript
+1. #### `npm init -y`
+2. #### `npm i -D parcel typescript`
+
+### package.json
 ```json
 {
   "name": "typescript-tutorial",
