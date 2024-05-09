@@ -2,6 +2,7 @@
 
 1. #### `npm init -y`
 2. #### `npm i -D parcel typescript`
+3. 
 
 ### package.json
 ```json
