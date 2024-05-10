@@ -1,23 +1,38 @@
-// 1. number (정수,소수,NaN,infinity 등 전부 통용) 숫자전용메소드만 사용가능
-let num1: number= 123; // : number =>주석(annotation)
-let num2: number= 0.123;
+// 타입계층
 
-// 2. string ("", '', ``, `${}` 등 전부 통용) 문자열전용 메소드만 사용가능
-let str1: string= "hello";  
-let str2: string= `hello ${num1}`;
+// unknown 타입은 슈퍼타입, 최상단(모두 담을 수 있음)
+// 모든타입 업캐스팅 가능, 다운캐스팅은 불가
+function unknownExam(){
+	let a: unknown= 1;
+	let b: unknown= "hello";
+	let c: unknown= true;
+	let d: unknown= null;
+	let e: unknown= undefined;
+}
 
-// 3. boolean (true, false 만 사용가능)
-let bool1: boolean= true;  
-let bool2: boolean= false;
+// Never 타입(공집합): 모든타입의 서브기때문에 업캐가능 다캐불가
+// never 타입은 어떤값도 저장되어서는 안되는 변수의 타입으로 활용하면 좋음!
+function neverExam(){
+	function neverFunc():never {
+		while (true){}
+	}
+}
 
-// 4. null (null 만 사용가능)
-let null1: null= null;  
+// void 타입(함수의 리턴이 필요 없을때 사용)
+function voidExam(){
+	function voidFunc():void {
+		console.log("hi");
+		return undefined; // 가능 why? underfined타입의 슈퍼타입이기때문
+	}
+}
 
-// 5. undefined (undefined 만 사용가능)
-let unde1: undefined= undefined;
+//any 타입
+// 타입상으로는 unknown타입의 밑에 위치하지만 치트키 타입이다 뭘해도 가능
+// 무슨타입이여도 업캐스팅 다운캐스팅 전부가능
+// never타입에만 다운캐스팅 불가
+function anyExam(){
+	let unknownVar: unknown;
+	let anyVar: any;
 
-// 6. 리터럴 타입(타입에 명시된 값만 들어올 수 있음!!)
-// 리터럴 -> 값
-let numA: 10= 10;
-let strA: "hello"= "hello";
-let boolA: "true"= "true";
+	anyVar= unknownVar; // 가능
+}
