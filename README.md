@@ -31,3 +31,25 @@
   "include": ["src"]
 }
 ```
+### package.json
+ES Module을 사용하려면 package.json 에도 type을 module을 설정해줘야한다(.js확장자를 가진 파일에서도 ES 모듈문법을 사용할 수 있게 된다)
+```json
+{
+  "name": "typescript-tutorial",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^20.12.11"
+  }
+}
+
+```
+![image](https://github.com/foriinrangelen/TypeScript/assets/123726292/fb9fda3d-d446-4ed5-a942-44615fd359e7)
+
