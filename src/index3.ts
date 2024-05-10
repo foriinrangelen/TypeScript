@@ -1,44 +1,78 @@
-// 객체 끼리의 타입 호환에서는 프로퍼티를 기준으로 슈퍼타입을 결정한다 
-// ⇒ 프로퍼티가 더 적은게 슈퍼(부모) 타입이다 그래서 위와같은 예제에서는 animal객체는 2개의 공통된 프로퍼티를가지고있고 
-// dog 객체에서는 breed라는 프로퍼티를 추가로 가지고있기때문에 animal 객체가 슈퍼타입이 된다. 
-// 즉 animal타입의 객체는 dog타입으로 다운캐스팅이 불가능 하나 dog타입객체는 animal타입으로 업캐스팅이 가능하다
+// 대수 타입
+// 여러개의 타입을 합성해서 새롭게 만들어 낸 타입
+// 합집합 타입과 교집합 타입이 존재
 
-// book 타입
-type Book= {
+// 1. Union 타입 (합집합 타입)
+let a : string | number;
+let b : string | number | boolean; // 계속 추가가능
+let arr: (number| string| boolean)[] = [1,"hello", true]
+a= 1;
+a= "hello" // 둘 다 들어갈 수 있음
+
+b= 1;
+b= "hello"
+b= true; // 도 가능
+
+type Dog= {
 	name: string;
-	price: number;
-};
-
-// ProgrammingBook 타입
-type ProgrammingBook= {
+	color: string;
+}
+type Person= {
 	name: string;
-	price: number;
-	skill: string;
-};
+	language: string;
+}
+// 타입별칭 (type as) 으로도 유니언타입 가능
+type Union1= Dog | Person
 
-let book:Book;
-let programmingBook: ProgrammingBook ={
-	name: "한 입 크기로 잘라먹는 리엑트",
-	price: 33000,
-	skill: "reactjs",
+let union1: Union1= {
+	name: "",
+	color:"",
 }
 
-// 와 같을 때
-// Book 타입과 ProgrammingBook 타입의 관계는 Book의 프로퍼티가 더적고
-// 공통된 프로퍼티를 전부 가지고 있기 때문에 Book 타입이 슈퍼타입이다
-// 그래서 
-book = programmingBook; // 가 가능하다
-// 하지만 
-let book2:Book ={
-	name: "한 입 크기로 잘라먹는 리엑트",
-	price: 33000,
-	// skill: "reactjs", // 에러발생
-}; 
+let union2: Union1= {
+	name: "",
+	language:"",
+}
 
-// 둘다 같은 기능을 하는 코드지만 아래는 되고 위는 되지않음
-// ⇒ 객체리터럴형식으로 넣게되면 '초과프로퍼티 검사' 를 진행하기때문이며
-// Book 타입에 딱 맞게 객체리터럴을 할당해야함
+let union3: Union1= {
+	name: "",
+	color:"",
+	language:"",
+}
+// 까지는 전부가능(에러안남) 그러나
 
-// let book3: Book = programmingBook; 처럼 변수에 할당해서 초기화를 해주면
-// 초과 프로퍼티 검사를 피해갈 수 있음, 
-// 함수에 argument(parameter)로 객체를 사용할때에도 이런식으로 담아두어서 사용해야함
+//let union4: Union1= {
+//	name: "",
+//} // 은 에러발생 why?
+
+/* union1 타입을 Dog| person 로 정의 하면 union1은 dog객체의 프로퍼티를 전부 가지기때문에 가능
+   union2는 person의 프로퍼티를 전부 가지기때문에가능, union3은 dog 타입과 person 타입의 프로퍼티를 합집합 형식으로 전부 가지고 있기때문에 가능
+   그러나 union4는 dog타입과 person타입의 합집합 어디 부분에도 들어가 있지 않기때문에 불가능하다(합집합 개념으로 이해) */
+
+// 교집합타입 (intersection)
+
+let variable: number & string; // => 공집합, never 타입이 된다
+// intersection 타입은 기본타입으로 만들게되면 웬만해서는 대부분
+// never 타입 why? 기본타입들 중에서는 겹치거나 공유하는 부분이
+// 거의 없음
+// 그래서 대부분 intersection타입은 주로 객체타입에 사용
+
+type Dog1= {
+	name: string;
+	color: string;
+}
+
+type Person1= {
+	name: string;
+	language: string;
+}
+// 타입별칭 (type as)
+type Intersection= Dog1 & Person1
+
+let intersection: Intersection= {
+	name: "",
+	color:"",
+	language:"", 
+}
+// 로 전부 타입들에 정의되어있는 프로퍼티들을 가져와야한다(교집합)
+// 교집합이 되려면 dog 타입과 person 타입 전부 만족해야하기 때문
