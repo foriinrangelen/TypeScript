@@ -1,38 +1,71 @@
-// 타입계층
+// 객체 타입의 호환성
+type Animal= {
+    name: string;
+    color: string;
+};
 
-// unknown 타입은 슈퍼타입, 최상단(모두 담을 수 있음)
-// 모든타입 업캐스팅 가능, 다운캐스팅은 불가
-function unknownExam(){
-	let a: unknown= 1;
-	let b: unknown= "hello";
-	let c: unknown= true;
-	let d: unknown= null;
-	let e: unknown= undefined;
+type Dog= {
+    name: string;
+    color: string;
+    breed: string;
+};
+
+let animal:Animal= {
+    name:"기린",
+    color:"yellow",
 }
 
-// Never 타입(공집합): 모든타입의 서브기때문에 업캐가능 다캐불가
-// never 타입은 어떤값도 저장되어서는 안되는 변수의 타입으로 활용하면 좋음!
-function neverExam(){
-	function neverFunc():never {
-		while (true){}
-	}
+let dog:Dog= {
+    name:"강아지",
+    color:"brown",
+    breed: "진도",
 }
 
-// void 타입(함수의 리턴이 필요 없을때 사용)
-function voidExam(){
-	function voidFunc():void {
-		console.log("hi");
-		return undefined; // 가능 why? underfined타입의 슈퍼타입이기때문
-	}
+animal= dog // 문제없음
+// dog= animal; 에러발생
+
+// 객체끼리의 타입호환에서는 프로퍼티를 기준으로 슈퍼타입을 결정,
+// => 프로퍼티가 더 적은게 슈퍼(부모) 타입이다. 그래서 위와같은 예제에서
+// animal은 2개의 프로퍼티, dog객체는 3개의 프로퍼티를 가지고 있기때문에 animal 객체가 슈퍼타입이 된다 
+// = animal타입은 dog타입으로 다운캐스팅이 불가능하다 dog타입은 animal타입으로 업캐스팅이 가능하다
+
+// 초과 프로퍼티 검사
+// book 타입
+type Book= {
+	name: string;
+	price: number;
+};
+
+// ProgrammingBook 타입
+type ProgrammingBook= {
+	name: string;
+	price: number;
+	skill: string;
+};
+
+let book:Book;
+let programmingBook: ProgrammingBook ={
+	name: "한 입 크기로 잘라먹는 리엑트",
+	price: 33000,
+	skill: "reactjs",
 }
 
-//any 타입
-// 타입상으로는 unknown타입의 밑에 위치하지만 치트키 타입이다 뭘해도 가능
-// 무슨타입이여도 업캐스팅 다운캐스팅 전부가능
-// never타입에만 다운캐스팅 불가
-function anyExam(){
-	let unknownVar: unknown;
-	let anyVar: any;
+// 와 같을 때
+// Book 타입과 ProgrammingBook 타입의 관계는 Book의 프로퍼티가 더적고
+// 공통된 프로퍼티를 전부 가지고 있기 때문에 Book 타입이 슈퍼타입이다
+// 그래서 
+book = programmingBook; // 가 가능하다
+// 하지만 
+let book2:Book ={
+	name: "한 입 크기로 잘라먹는 리엑트",
+	price: 33000,
+	// skill: "reactjs", // 에러발생
+}; 
 
-	anyVar= unknownVar; // 가능
-}
+// 둘다 같은 기능을 하는 코드지만 아래는 되고 위는 되지않음
+// ⇒ 객체리터럴형식으로 넣게되면 '초과프로퍼티 검사' 를 진행하기때문이며
+// Book 타입에 딱 맞게 객체리터럴을 할당해야함
+
+// let book3: Book = programmingBook; 처럼 변수에 할당해서 초기화를 해주면
+// 초과 프로퍼티 검사를 피해갈 수 있음, 
+// 함수에 argument(parameter)로 객체를 사용할때에도 이런식으로 담아두어서 사용해야함
