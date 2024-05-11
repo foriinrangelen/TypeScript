@@ -15,7 +15,7 @@
 #### 3. `npm i typescript -g` (타입스크립트 컴파일러 설치 tsc -v로 설치확인)
 > #### 만약 tsc: 이 시스템에서 스크립트를 실행 할 수 없으므로.. 에러발생 시
 > Windows PowerShell 관리자권한으로 실행 > get-executionpolicy 로 현재 권한상태확인 (Restricted)가 표시된다면 Set-ExecutionPolicy RemoteSigned 로 권한변경
-#### 4. `npm i -g tsx` (컴파일과 동시에 JS파일 실행, 오류 발생 시 관리자 권한으로 실행, ex tsx src/index.ts)
+#### 4. `npm i -g tsx` (컴파일과 동시에 JS파일 실행, 오류 발생 시 관리자 권한으로 실행, ex tsx src/index.ts), tsx는 JS파일X, tsc는 JS파일 O
 ### tsconfig.json
 ```json
 {
