@@ -66,28 +66,6 @@ interface Person3 {
 
   // 인터페이스 확장하기
   // 하나의 인터페이스를 다른 인터페이스들이 상속받아 중복된 프로퍼티를 정의하지 않도록 도와주는 문법
-  interface Animal {
-	name: string;
-	age: number;
-  }
-  
-  interface Dog {
-	name: string;
-	age: number;
-	isBark: boolean;
-  }
-  
-  interface Cat {
-	name: string;
-	age: number;
-	isScratch: boolean;
-  }
-  
-  interface Chicken {
-	name: string;
-	age: number;
-	isFly: boolean;
-  }
   
   // 각각 Animal 타입을 기반으로 각각의 타입들이 추가적인 프로퍼티들을 가지고있는
   // 상태일때 
@@ -97,8 +75,14 @@ interface Person3 {
   }
   
   interface Dog extends Animal {
-	breed: string;
+	isBark: boolean;
   }
+  const dog: Dog = {
+	name: "",
+	color: "",
+	isBark: true
+  };
+
   
   interface Cat extends Animal {
 	isScratch: boolean;
@@ -112,22 +96,6 @@ interface Person3 {
   // 가지고 올 수 있다 따라서 Animal을 상속받은 타입들은 name, age의 프로퍼티를 가지게된다
   // 이때 확장 대상인 Animal 타입은 나머지 타입들의 슈퍼타입이 된다
   
-  interface Animal {
-	name: string;
-	color: string;
-  }
-  
-  interface Dog extends Animal {
-	breed: string;
-  }
-  
-  const dog: Dog = {
-	name: "돌돌이",
-	color: "brown",
-	breed: "진도",
-	age:20,
-	isBark:true
-  };
 
   // 프로퍼티 재정의하기
   interface Animal {
@@ -135,10 +103,10 @@ interface Person3 {
 	color: string;
   }
   
-  interface Dog extends Animal {
-	name: string; // 타입 재 정의
-	breed: string;
-  }
+//   interface Dog extends Animal {
+// 	name: string; // 타입 재 정의
+// 	breed: string;
+//   }
 
   // 와 같이 슈퍼타입의 프로퍼티를 가져와서 자식타입에서 재정의가 가능하다
   // 하지만 프로퍼티를 재정의할 때 
@@ -153,7 +121,7 @@ interface Person3 {
 	color: string;
   };
   
-  interface Dog extends Animal1 {
+  interface Dog1 extends Animal1 {
 	breed: string;
   } // 가능
   
@@ -163,10 +131,9 @@ interface Person3 {
   const dogCat: DogCat = {
 	name: "",
 	color: "",
-	breed: "",
 	isScratch: true,
 	isBark:false,
-	age:20
+	// age:20
   }
 
 
