@@ -71,7 +71,7 @@ class ExecutiveOfficer extends Employee1 {
  * 타입스크립트에서만 제공되는 기능, 클래스의 특정 필드나 메서드를 접근할 수 있는 범위를 설정하는기능
  * public: 모든 범위에서 접근가능 (접근제어자를 사용하지 않으면 default 값)
  * private: 클래스 내부에서만 접근가능
- * proteced: 클래스 내부 또는 파생클래스 내부에서만 접근가능
+ * protected: 클래스 내부 또는 파생클래스 내부에서만 접근가능
  */
 class Employee2 {
   // 필드
